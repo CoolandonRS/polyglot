@@ -1,0 +1,1 @@
+﻿Copied from [SharedMemory](../../SharedMemory) on build using hard links.

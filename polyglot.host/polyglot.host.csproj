@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>polyglot</AssemblyName>
+        <RootNamespace>CoolandonRS.polyglot</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>CoolandonRS.polyglot</PackageId>
+        <Version>1.0.0-beta</Version>
+        <Authors>CoolandonRS</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <Target Name="CopySharedMemory" BeforeTargets="PreBuildEvent">
+        <ItemGroup>
+            <LocalMemoryFiles Include="$(MSBuildProjectDirectory)\SharedMemory\*.cs" />
+            <MemoryFiles Include="$(MSBuildProjectDirectory)\..\SharedMemory\*.cs" />
+        </ItemGroup>
+      <Delete Files="@(LocalMemoryFiles)" />
+      <Copy SourceFiles="@(MemoryFiles)" DestinationFolder="$(MSBuildProjectDirectory)\SharedMemory" UseHardlinksIfPossible="true"/>
+    </Target>
+
+</Project>
