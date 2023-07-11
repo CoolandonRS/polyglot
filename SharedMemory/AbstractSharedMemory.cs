@@ -23,12 +23,12 @@ public abstract class AbstractSharedMemory : IDisposable {
     public async Task Empty() => await Set(0, Array.Empty<byte>());
 
     /// <summary>
-    /// Should only be used if catastrophic errors occur, typically caused by cancelling at really, really, really bad times. <br/>
+    /// Should only be used if catastrophic errors occur, typically caused by cancelling. <br/>
     /// Sets the status to AwaitingWrite, and completely clears all contents, losing all data.
     /// </summary>
     public void Nuke() {
         var arr = GetRaw();
-        for (var i = 0; i < arr.Length; i++) arr[i] = 0;
+        for (var i = arr.Length; i > 0; i--) arr[i] = 0;
     }
 
     /// <summary> Overwrites current data with val, padding with 0s. </summary>
